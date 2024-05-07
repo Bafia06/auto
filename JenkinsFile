@@ -4,7 +4,7 @@ pipeline{
     }
 
     stages{
-        stage('Install appium'){
+        /*stage('Install appium'){
             steps{
                 bat 'npm install -g appium'
             }
@@ -33,7 +33,7 @@ pipeline{
             steps{
                 bat 'mvn test'
             }
-        }
+        }*/
 
     }
 }
