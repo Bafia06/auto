@@ -3,6 +3,11 @@ pipeline{
         label 'windows' 
     }
 
+    tools{
+        nodejs 'NodeJS'
+        maven 'mvn'
+    }
+
     stages{
         stage('Install appium'){
             steps{
