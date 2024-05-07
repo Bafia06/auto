@@ -4,6 +4,11 @@ pipeline{
     }
 
     stages{
+        stage('Install appium'){
+            steps{
+                echo "${image}"
+            }
+        }
         /*stage('Install appium'){
             steps{
                 bat 'npm install -g appium'
