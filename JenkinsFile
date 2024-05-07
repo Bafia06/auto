@@ -9,11 +9,11 @@ pipeline{
     }
 
     stages{
-        stage('Install appium'){
-            steps{
-                bat 'npm install -g appium'
-            }
-        }
+        //stage('Install appium'){
+          //  steps{
+            //    bat 'npm install -g appium'
+            //}
+        //}
 
         //stage('Download images'){
           //  steps{
