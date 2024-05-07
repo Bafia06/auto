@@ -1,0 +1,39 @@
+pipeline{
+    agent {
+        label 'windows' 
+    }
+
+    stages{
+        stage('Install appium'){
+            steps{
+                sh 'npm install -g appium'
+            }
+        }
+
+        //stage('Download images'){
+          //  steps{
+               // sh 'sdkmanager system-images;android-34;google_apis;x86_64'
+            //}
+        //}
+
+        stage('Create & Start emulator'){
+            steps{
+                sh 'avdmanager create avd -c 100M -k  sdkmanager system-images;android-34;google_apis;x86_64 -n pixel_8_pro'
+                sh 'emulator -avd pixel_8_pro -no-window -no-boot-anim'
+            }
+        }
+
+        stage('Start appium'){
+            steps{
+                sh 'appium'
+            }
+        }
+
+        stage('Run the tests'){
+            steps{
+                sh 'mvn test'
+            }
+        }
+
+    }
+}
