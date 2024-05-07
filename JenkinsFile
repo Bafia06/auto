@@ -6,24 +6,19 @@ pipeline{
     stages{
         stage('Install appium'){
             steps{
-                echo "${image}"
-            }
-        }
-        /*stage('Install appium'){
-            steps{
                 bat 'npm install -g appium'
             }
         }
 
         //stage('Download images'){
           //  steps{
-               // bat 'sdkmanager system-images;android-34;google_apis;x86_64'
+               // bat 'sdkmanager ${image}'
             //}
         //}
 
         stage('Create & Start emulator'){
             steps{
-                bat 'avdmanager create avd -c 100M -k system-images;android-34;google_apis;x86_64 -n pixel_8_pro'
+                bat 'avdmanager create avd -c 100M -k ${image} -n pixel_8_pro'
                 bat 'emulator -avd pixel_8_pro -no-window -no-boot-anim'
             }
         }
@@ -38,7 +33,7 @@ pipeline{
             steps{
                 bat 'mvn test'
             }
-        }*/
+        }
 
     }
 }
