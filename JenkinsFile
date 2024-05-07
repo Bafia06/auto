@@ -18,7 +18,7 @@ pipeline{
 
         stage('Create & Start emulator'){
             steps{
-                bat 'avdmanager create avd -c 100M -k  sdkmanager system-images;android-34;google_apis;x86_64 -n pixel_8_pro'
+                bat 'avdmanager create avd -c 100M -k system-images;android-34;google_apis;x86_64 -n pixel_8_pro'
                 bat 'emulator -avd pixel_8_pro -no-window -no-boot-anim'
             }
         }
