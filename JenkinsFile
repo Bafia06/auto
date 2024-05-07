@@ -23,7 +23,7 @@ pipeline{
 
         stage('Create & Start emulator'){
             steps{
-                bat 'avdmanager create avd -c 100M -k $image -n pixel_8_pro'
+                bat 'avdmanager create avd -c 100M -k ${params.image} -n pixel_8_pro'
                 bat 'emulator -avd pixel_8_pro -no-window -no-boot-anim'
             }
         }
