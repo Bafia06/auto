@@ -15,7 +15,7 @@ pipeline{
                 script {
                     def installedDrivers = bat(script: 'appium driver list --installed', returnStdout: true).trim()
                     if (installedDrivers.contains("uiautomator2")) {
-                        echo "uiautomator2 driver is already installed"
+                        bat 'echo "uiautomator2 driver is already installed"'
                     } else {
                         bat 'appium driver install uiautomator2'
             }
