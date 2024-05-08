@@ -20,7 +20,7 @@ pipeline{
 
         stage('Download images'){
             steps{
-                bat 'sdkmanager ${image}'
+                bat 'sdkmanager %image%'
             }
         }
 
