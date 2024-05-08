@@ -9,12 +9,12 @@ pipeline{
     }
 
     stages{
-        //stage('Install appium'){
-          //  steps{
-            //    bat 'npm install -g appium'
-            //    bat 'appium driver install uiautomator2'  
-            //}
-        //}
+        stage('Install appium'){
+            steps{
+                bat 'npm install -g appium'
+                bat 'appium driver install uiautomator2'  
+            }
+        }
 
         //stage('Download images'){
           //  steps{
