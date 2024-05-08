@@ -12,18 +12,17 @@ pipeline{
         stage('Install appium'){
             steps{
                 bat 'npm install -g appium'
-                // Try installing the driver, ignoring any errors
-                bat 'appium driver install uiautomator2 || echo UiAutomator2 driver might already be installed.'
+                //bat 'appium driver install uiautomator2'
     }
 }
 
 
 
-        //stage('Download images'){
-          //  steps{
-               // bat 'sdkmanager ${image}'
-            //}
-        //}
+        stage('Download images'){
+            steps{
+                bat 'sdkmanager ${image}'
+            }
+        }
 
         stage('Create & Start emulator'){
             steps{
