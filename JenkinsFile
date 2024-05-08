@@ -12,15 +12,14 @@ pipeline{
         stage('Install appium'){
     steps{
         bat 'npm install -g appium'
-        script {
-            // Check if driver is installed
-            def process = sh(returnStatus: true, script: 'appium driver list --installed | grep uiautomator2')
-            if (process.exitCode != 0) {
-                // Driver not found, install it
-                sh 'appium driver install uiautomator2'
-            } else {
-                echo 'UiAutomator2 driver already installed.'
-            }
+        bat 'appium driver list --installed' | findstr /i "uiautomator2"
+
+        // Check the output of the previous command (success/failure)
+        if (test returnStatus == 0) {
+            echo 'UiAutomator2 driver already installed.'
+        } else {
+            // Driver not found, install it
+            bat 'appium driver install uiautomator2'
         }
     }
 }
