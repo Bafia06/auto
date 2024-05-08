@@ -1,47 +1,51 @@
-pipeline{
-    agent {
-        label 'windows' 
+pipeline {
+  agent {
+    label 'windows'
+  }
+
+  tools {
+    nodejs 'NodeJS'
+    maven 'mvn'
+  }
+
+  stages {
+    stage('Install Appium') {
+      steps {
+        bat 'npm install -g appium'
+      }
     }
 
-    tools{
-        nodejs 'NodeJS'
-        maven 'mvn'
+    stage('Download Images') {
+      steps {
+        bat 'sdkmanager %image%'
+      }
     }
 
-    stages{
-        stage('Install appium'){
+    stage('Emulator & Appium (Parallel)') {
+      parallel {
+        stage('Create Emulator') {
             steps{
-                bat 'npm install -g appium'
-                //bat 'appium driver install uiautomator2'
-    }
-}
-
-
-
-        stage('Download images'){
-            steps{
-                bat 'sdkmanager %image%'
+              bat 'avdmanager -s create avd -c 100M -k %image% -n pixel_8_pro --force'
+              bat 'emulator -avd pixel_8_pro -no-window -gpu off'
             }
         }
 
-        stage('Create & Start emulator'){
-            steps{
-                bat 'avdmanager -s create avd -c 100M -k %image% -n pixel_8_pro --force'
-                bat 'emulator -avd pixel_8_pro -no-window -gpu off'
-            }
+        stage('Start Appium') {
+          steps {
+            bat 'appium'
+          }
         }
 
-        stage('Start appium'){
-            steps{
-                bat 'appium'
-            }
+        stage('Run Tests') {
+          steps {
+            bat 'timeout /t 300 /nobreak > NUL'
+            bat 'mvn test'
+          }
         }
-
-        stage('Run the tests'){
-            steps{
-                bat 'mvn test'
-            }
-        }
+      }
 
     }
+
+  }
+
 }
