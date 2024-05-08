@@ -38,7 +38,7 @@ pipeline {
 
         stage('Run Tests') {
           steps {
-            bat 'timeout /t 300 /nobreak > NUL'
+            bat 'timeout /t 300 /nobreak'
             bat 'mvn test'
           }
         }
