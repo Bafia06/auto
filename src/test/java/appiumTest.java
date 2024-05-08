@@ -18,7 +18,7 @@ public class appiumTest {
     WebDriver driver;
     @BeforeTest
     public void init() throws MalformedURLException {
-        File app= new File("C:\\Users\\rouqa\\Desktop\\Dropbox_374.2.4_apkcombo.com.apk");
+        File app= new File("‪C:\\tools\\jenkins-agent\\Dropbox_374.2.4_apkcombo.com.apk");
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("platformName", "Android");
         capabilities.setCapability("automationName", "UiAutomator2");
@@ -26,7 +26,7 @@ public class appiumTest {
         capabilities.setCapability("app", app.getAbsolutePath());
         capabilities.setCapability("appActivity", "com.dropbox.dbapp.auth.login.DbappLoginActivity");
         capabilities.setCapability("appPackage", "com.dropbox.android");
-        driver = new AndroidDriver(new URL("http://127.0.0.1:4723/"), capabilities);
+        driver = new AndroidDriver(new URL("http://192.168.100.148:4723/"), capabilities);
 
     }
 
