@@ -10,19 +10,13 @@ pipeline{
 
     stages{
         stage('Install appium'){
-    steps{
-        bat 'npm install -g appium'
-        bat 'appium driver list --installed' | findstr /i "uiautomator2"
-
-        // Check the output of the previous command (success/failure)
-        if (test returnStatus == 0) {
-            echo 'UiAutomator2 driver already installed.'
-        } else {
-            // Driver not found, install it
-            bat 'appium driver install uiautomator2'
-        }
+            steps{
+                bat 'npm install -g appium'
+                // Try installing the driver, ignoring any errors
+                bat 'appium driver install uiautomator2 || echo UiAutomator2 driver might already be installed.'
     }
 }
+
 
 
         //stage('Download images'){
