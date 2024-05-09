@@ -30,11 +30,11 @@ pipeline {
             }
         }
 
-       // stage('Start Appium') {
-         // steps {
-           // bat 'appium'
-          //}
-        //}
+        stage('Start Appium') {
+          steps {
+            bat 'appium'
+          }
+        }
 
         //stage('Run Tests') {
           //steps {
