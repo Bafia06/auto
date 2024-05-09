@@ -26,7 +26,7 @@ pipeline {
         stage('Create Emulator') {
             steps{
               //bat 'avdmanager -s create avd -c 100M -k %image% -n pixel_8_pro --force'
-              bat 'cd C:\\Windows\\System32\\config\\systemprofile\\.appium\\node_modules\\appium-uiautomator2-driver\\node_modules\\io.appium.settings\\apks\\settings_apk-debug.apk'
+              bat 'cd C:\\Windows\\System32\\config\\systemprofile\\.appium\\node_modules\\appium-uiautomator2-driver\\node_modules\\io.appium.settings\\apks'
               bat 'cd C:\\Users\\rouqa\\AppData\\Local\\Android\\Sdk\\emulator'
               bat 'powershell -command "emulator -avd pixel_8_pro -no-window -gpu off"'
             }
