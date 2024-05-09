@@ -38,8 +38,8 @@ pipeline {
 
         stage('Run Tests') {
           steps {
-            bat 'powershell -command "Start-Sleep -s 200"'
-            bat 'mvn test'
+            bat 'powershell -command "Start-Sleep -s 100"'
+            bat 'mvn clean test'
           }
         }
       }
