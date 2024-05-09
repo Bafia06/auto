@@ -9,17 +9,17 @@ pipeline {
   }
 
   stages {
-    stage('Install Appium') {
-      steps {
-        bat 'npm install -g appium'
-      }
-    }
+    //stage('Install Appium') {
+      //steps {
+        //bat 'npm install -g appium'
+      //}
+    //}
 
-    stage('Download Images') {
-      steps {
-        bat 'sdkmanager %image%'
-      }
-    }
+    //stage('Download Images') {
+      //steps {
+        //bat 'sdkmanager %image%'
+      //}
+    //}
 
     stage('Emulator & Appium (Parallel)') {
       parallel {
