@@ -26,7 +26,7 @@ pipeline {
         stage('Create Emulator') {
             steps{
               bat 'avdmanager -s create avd -c 100M -k %image% -n pixel_8_pro --force'
-              bat 'emulator -avd pixel_8_pro'
+              bat 'emulator -avd pixel_8_pro -no-windows'
             }
         }
 
