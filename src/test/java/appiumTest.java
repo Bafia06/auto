@@ -15,7 +15,7 @@ public class appiumTest {
     WebDriver driver;
     @BeforeTest
     public void init() throws MalformedURLException {
-        File app= new File("C:\\tools\\jenkins-agent\\workspace\\Dropbox_374.2.4_apkcombo.com.apk");
+        File app= new File("C:\\tools\\jenkins-agent\\Dropbox_374.2.4_apkcombo.com.apk");
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("platformName", "Android");
         capabilities.setCapability("automationName", "UiAutomator2");
