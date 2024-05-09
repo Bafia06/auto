@@ -27,7 +27,7 @@ pipeline {
             steps{
               bat 'avdmanager -s create avd -c 100M -k %image% -n pixel_8_pro --force'
               bat 'cd C:\\Users\\rouqa\\AppData\\Local\\Android\\Sdk\\emulator'
-              bat 'powershell -command "emulator -avd pixel_8_pro -no-windows -gpu off"'
+              bat 'powershell -command "emulator -avd pixel_8_pro -no-window -gpu off"'
             }
         }
 
