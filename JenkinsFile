@@ -33,7 +33,7 @@ pipeline {
 
         stage('Start Appium') {
           steps {
-            bat 'cd C:\\Windows\\System32\\config\\systemprofile\\.appium\\node_modules\\appium-uiautomator2-driver\\node_modules\\io.appium.settings\\apks'
+            bat 'cd C:\\Windows\\System32\\config\\systemprofile\\.appium\\node_modules\\appium-uiautomator2-driver\\node_modules\\io.appium.settings\\apks && appium'
             bat 'appium'
           }
         }
