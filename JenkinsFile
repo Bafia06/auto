@@ -9,43 +9,43 @@ pipeline {
   }
 
   stages {
-    //stage('Install Appium') {
-      //steps {
-       // bat 'npm install -g appium'
-       // script {
-         // try {
-          //  bat 'appium driver install uiautomator2'
-          //} catch (err) {}
-       // }
-     // }
-   // }
+    stage('Install Appium') {
+      steps {
+        bat 'npm install -g appium'
+        script {
+          try {
+            bat 'appium driver install uiautomator2'
+          } catch (err) {}
+        }
+      }
+    }
 
-   // stage('Download Images') {
-     // steps {
-       // bat 'sdkmanager %image%'
-     // }
-   // }
+    stage('Download Images') {
+      steps {
+        bat 'sdkmanager %image%'
+      }
+    }
 
     stage('Emulator & Appium (Parallel)') {
       parallel {
         stage('Create Emulator') {
           steps {
-            script{
+            script {
               try {
-            //bat 'avdmanager -s create avd -c 100M -k %image% -n %AVD% --force'
-            bat 'emulator -avd %AVD% -no-window -gpu off'
-          }catch (err) {}
-          }
+                bat 'avdmanager -s create avd -c 100M -k %image% -n %AVD% --force'
+                bat 'emulator -avd %AVD% -no-window -gpu off'
+              } catch (err) {}
+            }
           }
         }
 
         stage('Start Appium') {
           steps {
-            script{
-              try{
-            bat 'appium'
-          } catch (err) {}
-          }
+            script {
+              try {
+                bat 'appium'
+              } catch (err) {}
+            }
           }
         }
 
