@@ -27,7 +27,7 @@ pipeline {
           steps {
             script {
               try {
-                timeout(time: 300, unit: 'SECONDS') {
+                timeout(time: 500, unit: 'SECONDS') {
                   bat 'avdmanager -s create avd -c 100M -k %image% -n pixel_8_pro --force'
                   bat 'emulator -avd pixel_8_pro -no-window -gpu off'
                 }
@@ -40,7 +40,7 @@ pipeline {
           steps {
             script {
               try {
-                timeout(time: 300, unit: 'SECONDS') {
+                timeout(time: 500, unit: 'SECONDS') {
                   bat 'appium'
                 }
               } catch (err) {}
