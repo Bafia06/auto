@@ -26,13 +26,18 @@ pipeline {
       }
     }
 
+    stage('Create AVD') {
+      steps {
+        bat 'avdmanager -s create avd -c 100M -k %image% -n %AVD% --force'
+      }
+    }
+
     stage('Emulator & Appium (Parallel)') {
       parallel {
         stage('Create Emulator') {
           steps {
             script {
               try {
-                //bat 'avdmanager -s create avd -c 100M -k %image% -n %AVD% --force'
                 bat 'emulator -avd %AVD% -no-window -gpu off'
               } catch (err) {}
             }
