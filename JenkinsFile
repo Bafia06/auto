@@ -12,7 +12,11 @@ pipeline {
     stage('Install Appium') {
       steps {
         bat 'npm install -g appium'
-        //bat 'appium driver install uiautomator2'
+        script {
+          try {
+            bat 'appium driver install uiautomator2'
+          } catch (err) {}
+        }
       }
     }
 
