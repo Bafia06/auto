@@ -28,7 +28,11 @@ pipeline {
 
     stage('Create AVD') {
       steps {
-        bat 'avdmanager -s create avd -c 100M -k %image% -n %AVD%'
+        script{
+          try {
+            bat 'avdmanager -s create avd -c 100M -k %image% -n %AVD%'
+          } catch (err) {}
+        }
       }
     }
 
