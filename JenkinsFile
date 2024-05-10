@@ -38,12 +38,14 @@ pipeline {
 
         stage('Run Tests') {
           steps {
-            try{
-              timeout(time: 5, unit: 'SECONDS'){
-                bat 'powershell -command "Start-Sleep -s 100"'
-                bat 'mvn clean test'
-              }
-            } catch (err) {}
+            script{
+              try{
+                timeout(time: 5, unit: 'SECONDS'){
+                  bat 'powershell -command "Start-Sleep -s 100"'
+                  bat 'mvn clean test'
+                }
+              } catch (err) {}
+            }
           }
         }
       }
