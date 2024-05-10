@@ -30,26 +30,14 @@ pipeline {
       parallel {
         stage('Create Emulator') {
           steps {
-            script {
-              try {
-                timeout(time: 500, unit: 'SECONDS') {
-                  bat 'avdmanager -s create avd -c 100M -k %image% -n %AVD% --force'
-                  bat 'emulator -avd %AVD% -no-window -gpu off'
-                }
-              } catch (err) {}
-            }
+            bat 'avdmanager -s create avd -c 100M -k %image% -n %AVD% --force'
+            bat 'emulator -avd %AVD% -no-window -gpu off'
           }
         }
 
         stage('Start Appium') {
           steps {
-            script {
-              try {
-                timeout(time: 500, unit: 'SECONDS') {
-                  bat 'appium'
-                }
-              } catch (err) {}
-            }
+            bat 'appium'
           }
         }
 
@@ -60,11 +48,18 @@ pipeline {
               bat 'mvn clean test'
             }
           }
+
+          post {
+            always {
+              script {
+                bat 'taskkill /F /IM node.exe /T'
+                bat 'taskkill /F /IM emulator.exe /T'
+              }
+            }
+          }
         }
       }
-
     }
-
   }
 
 }
