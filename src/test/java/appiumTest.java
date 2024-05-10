@@ -23,7 +23,7 @@ public class appiumTest {
         capabilities.setCapability("app", app.getAbsolutePath());
         capabilities.setCapability("appActivity", "com.dropbox.dbapp.auth.login.DbappLoginActivity");
         capabilities.setCapability("appPackage", "com.dropbox.android");
-        driver = new AndroidDriver(new URL("http://10.243.10.69:4723/"), capabilities);
+        driver = new AndroidDriver(new URL("http://192.168.11.119:4723/"), capabilities);
 
     }
 
