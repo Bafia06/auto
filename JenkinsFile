@@ -8,7 +8,7 @@ pipeline {
     maven 'mvn'
   }
 
-  //stages {
+  stages {
     //stage('Install Appium') {
       //steps {
         //bat 'npm install -g appium'
