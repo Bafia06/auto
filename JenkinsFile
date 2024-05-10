@@ -9,11 +9,11 @@ pipeline {
   }
 
   stages {
-    //stage('Install Appium') {
-      //steps {
-        //bat 'npm install -g appium'
-      //}
-    //}
+    stage('Install Appium') {
+      steps {
+        bat 'npm install -g appium'
+      }
+    }
 
     //stage('Download Images') {
       //steps {
@@ -36,12 +36,12 @@ pipeline {
           }
         }
 
-        //stage('Run Tests') {
-          //steps {
-            //bat 'powershell -command "Start-Sleep -s 100"'
-            //bat 'mvn clean test'
-          //}
-        //}
+        stage('Run Tests') {
+          steps {
+            bat 'powershell -command "Start-Sleep -s 100"'
+            bat 'mvn clean test'
+          }
+        }
       }
 
     }
