@@ -38,7 +38,7 @@ pipeline {
 
         stage('Run Tests') {
           steps {
-            timeout(time: 1, unit: 'm'){
+            timeout(time: 5, unit: 'SECONDS'){
             bat 'powershell -command "Start-Sleep -s 100"'
             bat 'mvn clean test'
           }
