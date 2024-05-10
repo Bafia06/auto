@@ -9,28 +9,28 @@ pipeline {
   }
 
   stages {
-    stage('Install Appium') {
-      steps {
-        bat 'npm install -g appium'
-        script {
-          try {
-            bat 'appium driver install uiautomator2'
-          } catch (err) {}
-        }
-      }
-    }
+    //stage('Install Appium') {
+      //steps {
+       // bat 'npm install -g appium'
+       // script {
+         // try {
+          //  bat 'appium driver install uiautomator2'
+          //} catch (err) {}
+       // }
+     // }
+   // }
 
-    stage('Download Images') {
-      steps {
-        bat 'sdkmanager %image%'
-      }
-    }
+   // stage('Download Images') {
+     // steps {
+       // bat 'sdkmanager %image%'
+     // }
+   // }
 
     stage('Emulator & Appium (Parallel)') {
       parallel {
         stage('Create Emulator') {
           steps {
-            bat 'avdmanager -s create avd -c 100M -k %image% -n %AVD% --force'
+            //bat 'avdmanager -s create avd -c 100M -k %image% -n %AVD% --force'
             bat 'emulator -avd %AVD% -no-window -gpu off'
           }
         }
@@ -41,7 +41,7 @@ pipeline {
           }
         }
 
-        stage('Run Tests') {
+        /*stage('Run Tests') {
           steps {
             script {
               bat 'powershell -command "Start-Sleep -s 250"'
@@ -57,7 +57,7 @@ pipeline {
               }
             }
           }
-        }
+        }*/
       }
     }
   }
