@@ -9,7 +9,7 @@ pipeline {
   }
 
   stages {
-   /* stage('Install Appium') {
+    stage('Install Appium') {
       steps {
         bat 'npm install -g appium'
         script {
@@ -18,7 +18,7 @@ pipeline {
           } catch (err) {}
         }
       }
-    }*/
+    }
 
     stage('Download Images') {
       steps {
