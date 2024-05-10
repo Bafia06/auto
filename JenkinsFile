@@ -28,8 +28,8 @@ pipeline {
             script {
               try {
                 timeout(time: 500, unit: 'SECONDS') {
-                  bat 'avdmanager -s create avd -c 100M -k %image% -n pixel_8_pro --force'
-                  bat 'emulator -avd pixel_8_pro -no-window -gpu off'
+                  bat 'avdmanager -s create avd -c 100M -k %image% -n %AVD% --force'
+                  bat 'emulator -avd %AVD% -no-window -gpu off'
                 }
               } catch (err) {}
             }
