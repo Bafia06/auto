@@ -9,11 +9,11 @@ pipeline {
   }
 
   stages {
-    //stage('Install Appium') {
-      //steps {
-       // bat 'npm install -g appium'
-      //}
-    //}
+    stage('Install Appium') {
+      steps {
+        bat 'npm install -g appium'
+      }
+    }
 
     //stage('Download Images') {
       //steps {
@@ -23,28 +23,36 @@ pipeline {
 
     stage('Emulator & Appium (Parallel)') {
       parallel {
-        //stage('Create Emulator') {
-          //  steps{
-            //  bat 'avdmanager -s create avd -c 100M -k %image% -n pixel_8_pro --force'
-              //bat 'emulator -avd pixel_8_pro -no-window -gpu off'
-           // }
-       // }
+        stage('Create Emulator') {
+          steps {
+            script {
+              try {
+                timeout(time: 200, unit: 'SECONDS') {
+                  bat 'avdmanager -s create avd -c 100M -k %image% -n pixel_8_pro --force'
+                  bat 'emulator -avd pixel_8_pro -no-window -gpu off'
+                }
+              } catch (err) {}
+            }
+          }
+        }
 
-        //stage('Start Appium') {
-          //steps {
-            //bat 'appium'
-          //}
-        //}
+        stage('Start Appium') {
+          steps {
+            script {
+              try {
+                timeout(time: 200, unit: 'SECONDS') {
+                  bat 'appium'
+                }
+              } catch (err) {}
+            }
+          }
+        }
 
         stage('Run Tests') {
           steps {
-            script{
-              try{
-                timeout(time: 5, unit: 'SECONDS'){
-                  bat 'powershell -command "Start-Sleep -s 100"'
-                  bat 'mvn clean test'
-                }
-              } catch (err) {}
+            script {
+              bat 'powershell -command "Start-Sleep -s 150"'
+              bat 'mvn clean test'
             }
           }
         }
