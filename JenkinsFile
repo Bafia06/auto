@@ -41,10 +41,10 @@ pipeline {
           }
         }
 
-        /*stage('Run Tests') {
+        stage('Run Tests') {
           steps {
             script {
-              bat 'powershell -command "Start-Sleep -s 250"'
+              bat 'powershell -command "Start-Sleep -s 60"'
               bat 'mvn clean test'
             }
           }
@@ -57,7 +57,7 @@ pipeline {
               }
             }
           }
-        }*/
+        }
       }
     }
   }
