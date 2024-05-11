@@ -16,27 +16,6 @@ pipeline {
         choice(name: 'sysImage', choices: ['default', 'google_apis', 'google_apis_playstore', 'android-wear', 'android-tv'] , description: 'System image')
     }
 
-environment {
-    apiLevel = """${script {
-        def apiLevel = [
-            '6': 23,
-            '7.0': 24,
-            '7.1': 25,
-            '8.0': 26,
-            '8.1': 27,
-            '9': 28,
-            '10': 29,
-            '11': 30,
-            '12': 31,
-            '12L': 32,
-            '13': 33,
-            '14': 34,
-            '15': 35
-        ].get(params.androidVersion)
-        return apiLevel
-    }}"""
-}
-
   stages {
     /*stage('Install Appium') {
       steps {
@@ -52,7 +31,7 @@ environment {
     stage('Download Images') {
       steps {
         script {
-           /* def apiLevel = [ // Map Android version to API level
+            def apiLevel = [
                 '6': 23,
                 '7.0': 24,
                 '7.1': 25,
@@ -66,10 +45,10 @@ environment {
                 '13': 33,
                 '14': 34,
                 '15': 35
-            ].get(androidVersion)*/
+            ].get(androidVersion)
 
             
-            bat "sdkmanager system-images;android-${env.apiLevel};%sysImage%;%arch%"
+            bat "sdkmanager system-images;android-${apiLevel};%sysImage%;%arch%"
 
             
         }
@@ -79,8 +58,23 @@ environment {
     /*stage('Create AVD') {
       steps {
         script{
+          def apiLevel = [
+                '6': 23,
+                '7.0': 24,
+                '7.1': 25,
+                '8.0': 26,
+                '8.1': 27,
+                '9': 28,
+                '10': 29,
+                '11': 30,
+                '12': 31,
+                '12L': 32,
+                '13': 33,
+                '14': 34,
+                '15': 35
+            ].get(androidVersion)
           try {
-            bat 'avdmanager -s create avd -c 100M -k %image% -n %AVD%'
+            bat 'avdmanager -s create avd -c 100M -k system-images;android-${apiLevel};%sysImage%;%arch% -n %AVD%'
           } catch (err) {}
         }
       }
