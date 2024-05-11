@@ -6,6 +6,27 @@ pipeline {
   tools {
     nodejs 'NodeJS'
     maven 'mvn'
+  } 
+
+  environment {
+    apiLevel = "${script {
+      def apiLevel = [
+        '6': 23,
+        '7.0': 24,
+        '7.1': 25,
+                '8.0': 26,
+                '8.1': 27,
+                '9': 28,
+                '10': 29,
+                '11': 30,
+                '12': 31,
+                '12L': 32,
+                '13': 33,
+                '14': 34,
+                '15': 35
+      ].get(androidVersion)
+      return apiLevel
+    }}"
   }
 
   parameters {
@@ -30,7 +51,7 @@ pipeline {
     stage('Download Images') {
       steps {
         script {
-            def apiLevel = [ // Map Android version to API level
+           /* def apiLevel = [ // Map Android version to API level
                 '6': 23,
                 '7.0': 24,
                 '7.1': 25,
@@ -44,10 +65,10 @@ pipeline {
                 '13': 33,
                 '14': 34,
                 '15': 35
-            ].get(androidVersion)
+            ].get(androidVersion)*/
 
             
-            bat "sdkmanager system-images;android-${apiLevel};%sysImage%;%arch%"
+            bat "sdkmanager system-images;android-\${env.apiLevel};%sysImage%;%arch%"
 
             
         }
