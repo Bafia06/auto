@@ -48,7 +48,7 @@ pipeline {
 
             
             bat 'sdkmanager \"system-images;android-${apiLevel};${sysImage};${arch}\"'
-'
+
             
         }
       }
