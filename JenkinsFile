@@ -15,8 +15,8 @@ pipeline {
         choice(name: 'sysImage', choices: ['default', 'google_apis', 'google_apis_playstore', 'android-wear', 'android-tv', ''] , description: 'System image')
     }
 
-  /*stages {
-    stage('Install Appium') {
+  stages {
+    /*stage('Install Appium') {
       steps {
         bat 'npm install -g appium'
         script {
