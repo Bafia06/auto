@@ -44,7 +44,7 @@ pipeline {
                 '13': 33,
                 '14': 34,
                 '15': 35
-            ].get(${androidVersion})
+            ].get(params.androidVersion)
 
             
             bat 'sdkmanager system-images;android-%apiLevel%;%sysImage%;%arch%'
