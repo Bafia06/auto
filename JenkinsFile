@@ -8,7 +8,14 @@ pipeline {
     maven 'mvn'
   }
 
-  stages {
+  parameters {
+        
+        choice(name: 'androidVersion',choices: ['6', '7.0','7.1','8.0','8.1','9','10','11','12','12L','13','14','15'], description: 'Android Version', required: true)
+        choice(name: 'arch', choices: ['x86', 'arm64-v8a'], description: 'Target Architecture')
+        choice(name: 'sysImage', choices: ['default', 'google_apis', 'google_apis_playstore', 'android-wear', 'android-tv', ''] , description: 'System image')
+    }
+
+  /*stages {
     stage('Install Appium') {
       steps {
         bat 'npm install -g appium'
@@ -18,15 +25,35 @@ pipeline {
           } catch (err) {}
         }
       }
-    }
+    }*/
 
     stage('Download Images') {
       steps {
-        bat 'sdkmanager %image%'
+        script {
+            def apiLevel = [ // Map Android version to API level
+                '6': 23,
+                '7.0': 24,
+                '7.1': 25,
+                '8.0': 26,
+                '8.1': 27,
+                '9': 28,
+                '10': 29,
+                '11': 30,
+                '12': 31,
+                '12L': 32,
+                '13': 33,
+                '14': 34,
+                '15': 35
+            ].get(androidVersion)
+
+            
+            bat 'sdkmanager system-images;android-%apiLevel%;%sysImage%;%arch%'
+            
+        }
       }
     }
 
-    stage('Create AVD') {
+    /*stage('Create AVD') {
       steps {
         script{
           try {
@@ -76,7 +103,7 @@ pipeline {
           }
         }
       }
-    }
+    }*/
   }
 
 }
