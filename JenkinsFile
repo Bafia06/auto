@@ -10,7 +10,7 @@ pipeline {
 
   parameters {
         
-        choice(name: 'androidVersion',choices: ['6', '7.0','7.1','8.0','8.1','9','10','11','12','12L','13','14','15'], description: 'Android Version', required: true)
+        choice(name: 'androidVersion',choices: ['6', '7.0','7.1','8.0','8.1','9','10','11','12','12L','13','14','15'], description: 'Android Version')
         choice(name: 'arch', choices: ['x86', 'arm64-v8a'], description: 'Target Architecture')
         choice(name: 'sysImage', choices: ['default', 'google_apis', 'google_apis_playstore', 'android-wear', 'android-tv', ''] , description: 'System image')
     }
