@@ -74,7 +74,7 @@ pipeline {
                 '15': 35
             ].get(androidVersion)
           try {
-            bat 'avdmanager -s create avd -c 100M -k system-images;android-${apiLevel};%sysImage%;%arch% -n %AVD%'
+            bat "avdmanager -s create avd -c 100M -k system-images;android-${apiLevel};%sysImage%;%arch% -n %AVD%"
           } catch (err) {}
         }
       }
