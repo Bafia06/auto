@@ -7,7 +7,7 @@ WORKDIR /
 
 SHELL ["/bin/bash", "-c"]   
 
-RUN apt update && apt install -y curl sudo wget unzip bzip2 
+RUN apt update && apt install -y curl sudo wget unzip bzip2 libdrm-dev libxkbcommon-dev libgbm-dev libasound-dev libnss3 libxcursor1 libpulse-dev libxshmfence-dev xauth xvfb 
 
 
 # Android SDK ARGS
