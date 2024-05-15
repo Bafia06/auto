@@ -1,6 +1,6 @@
 pipeline {
   agent {
-    docker { image 'rachidouqa/android-14-emulator' }
+    docker { image 'rachidouqa/android_14_emulator' }
   }
 
   tools {
