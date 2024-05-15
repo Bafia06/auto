@@ -13,7 +13,7 @@ pipeline {
       steps {
         sh 'echo "hi"'
         sh 'sdkmanager --version'
-        sh 'avdmanager --version'
+       
         sh 'echo "no" | avdmanager create avd -k "system-images;android-34;google_apis_playstore;x86_64" -n test'
         sh 'emulator -avd test -no-window -gpu off'
       }
