@@ -1,1 +1,19 @@
+pipeline {
+  agent {
+    docker { image 'rachidouqa/android-14-emulator' }
+  }
 
+  tools {
+    nodejs 'NodeJS'
+    maven 'mvn'
+  }
+
+  stages {
+    stage('Test') {
+      steps {
+        sh 'avdmanager -s create avd -k "system-images;android-34;google_apis_playstore;x86_64" -n test'
+        sh 'emulator -avd test -no-window -gpu off'
+      }
+    }
+  }
+}
