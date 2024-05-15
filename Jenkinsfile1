@@ -14,7 +14,7 @@ pipeline {
         sh 'echo "hi"'
         sh 'sdkmanager --list'
         
-        sh 'echo "no" | avdmanager create avd -k "system-images;android-34;google_apis_playstore;x86_64" -n test'
+        sh 'echo "no" | avdmanager create avd -n test -k "system-images;android-34;google_apis_playstore;x86_64" '
         sh 'emulator -avd test -no-window -gpu off'
       }
     }
