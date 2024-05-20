@@ -1,11 +1,7 @@
-
 FROM openjdk:18-jdk-slim
-
-# Environment variable for silent package installation
 ENV DEBIAN_FRONTEND noninteractive
 
 WORKDIR /
-
 
 RUN apt update && apt install -y curl sudo wget unzip bzip2 \
   libdrm-dev libxkbcommon-dev libgbm-dev libasound-dev libnss3 \
@@ -46,3 +42,4 @@ RUN curl -sL https://deb.nodesource.com/setup_20.x | bash && \
     rm -Rf /tmp/* && rm -Rf /var/lib/apt/lists/*
 
 SHELL ["/bin/bash", "-c"]
+CMD ["appium"]
