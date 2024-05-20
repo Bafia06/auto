@@ -3,7 +3,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 WORKDIR /
 
-RUN apt update && apt install -y curl sudo wget unzip bzip2 git \
+RUN apt update && apt install -y curl sudo wget unzip bzip2 \
   libdrm-dev libxkbcommon-dev libgbm-dev libasound-dev libnss3 \
   libxcursor1 libpulse-dev libxshmfence-dev xauth xvfb
 
@@ -42,7 +42,8 @@ RUN curl -sL https://deb.nodesource.com/setup_20.x | bash && \
     apt-get autoremove --purge -y && \
     apt-get clean && \
     rm -Rf /tmp/* && rm -Rf /var/lib/apt/lists/*
-
+###################################################
+#This part is for jenkins agent's ssh connection
 RUN apt-get update && \
     apt-get -qy full-upgrade && \
     apt-get install -qy git && \
@@ -53,7 +54,7 @@ RUN apt-get update && \
     adduser --quiet jenkins && \
     echo "jenkins:jenkins" | chpasswd && \
     mkdir -p /home/jenkins/.m2
-
+###################################################
 COPY .ssh/authorized_keys /home/jenkins/.ssh/authorized_keys
 
 RUN chown -R jenkins:jenkins /home/jenkins/.m2/ && \
