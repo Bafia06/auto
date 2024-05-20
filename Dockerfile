@@ -5,7 +5,7 @@ WORKDIR /
 
 RUN apt update && apt install -y curl sudo wget unzip bzip2 \
   libdrm-dev libxkbcommon-dev libgbm-dev libasound-dev libnss3 \
-  libxcursor1 libpulse-dev libxshmfence-dev xauth xvfb
+  libxcursor1 libpulse-dev libxshmfence-dev xauth xvfb openssh-server
 
 ARG ARCH="x86_64"
 ARG TARGET="google_apis_playstore"
@@ -42,4 +42,6 @@ RUN curl -sL https://deb.nodesource.com/setup_20.x | bash && \
     rm -Rf /tmp/* && rm -Rf /var/lib/apt/lists/*
 
 SHELL ["/bin/bash", "-c"]
+EXPOSE 22
+ENTRYPOINT ["/usr/sbin/sshd", "-D"]
 CMD ["appium"]
