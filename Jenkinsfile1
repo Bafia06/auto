@@ -1,8 +1,8 @@
 pipeline {
   agent {
     docker { 
-      image 'rachidouqa/android_14_emulator'
-      args '-u root'
+      image 'android14'
+      args '-u root --device /dev/kvm'
     }
   }
 
@@ -14,7 +14,7 @@ pipeline {
   stages {
     stage('Test') {
       steps {
-        sh "avdmanager -s create avd  -n test -k 'system-images;android-34;google_apis_playstore;x86_64'"
+        sh "avdmanager -s create avd  -n test -k 'system-images;android-34;google_apis;x86_64'"
         sh 'emulator -avd test -no-window -gpu off'
       }
     }
