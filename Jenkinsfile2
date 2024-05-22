@@ -1,0 +1,66 @@
+pipeline {
+  agent {
+    docker { 
+      image 'android14'
+      args '-u root --device /dev/kvm'
+    }
+  }
+
+  tools {
+    nodejs 'NodeJS'
+    maven 'mvn'
+  } 
+
+ 
+  parameters {
+        string(name: 'AVD', defaultValue: 'Galaxy_S22', description: 'Name of your device')
+        string(name: 'WIDTH', defaultValue: '', description: 'Device resolution Width')
+        string(name: 'HEIGHT', defaultValue: '', description: 'Device resolution Height')
+    }
+
+  stages {
+    stage('Create AVD') {
+      steps {
+          script {
+          try {
+            sh "avdmanager -s create avd -k 'system-images;android-34;google_apis_playstore;x86_64 -n ${AVD}'"
+           } catch (err) {}
+          }
+      }
+    }
+
+
+
+    stage('Emulator & Appium (Parallel)') {
+      parallel {
+        stage('Create Emulator') {
+          steps {
+            script {
+              try {
+                sh 'emulator -avd ${AVD} -no-window -gpu off -skin ${WIDTH}x${HEIGHT}'
+              } catch (err) {}
+            }
+          }
+        }
+
+        stage('Run Tests') {
+          steps {
+            script {
+              sh 'sleep 60'
+              sh 'mvn clean test'
+            }
+          }
+
+          post {
+            always {
+              script {
+                sh -c 'ps aux | grep emulator | grep -v grep | awk "{print \$2}" | xargs kill -9'
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
