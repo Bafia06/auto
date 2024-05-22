@@ -46,7 +46,7 @@ pipeline {
         stage('Run Tests') {
           steps {
             script {
-              sh 'sleep 60'
+              sh 'sleep 6'
               sh 'mvn clean test'
             }
           }
@@ -54,7 +54,7 @@ pipeline {
           post {
             always {
               script {
-                sh 'ps aux | grep emulator | grep -v grep | awk "{print \$2}" | xargs kill -9'
+                sh "ps aux | grep emulator | grep -v grep | awk '{print \$2}' | xargs kill -9"
               }
             }
           }
