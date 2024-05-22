@@ -53,7 +53,7 @@ pipeline {
                 'S23': '1080x2340'
             ].get(AVD)
               try {
-                sh 'emulator -avd ${AVD} -no-window -gpu off -skin ${widthHeight}'
+                sh 'emulator -avd ${AVD} -no-window -gpu off -skin $widthHeight'
               } catch (err) {}
             }
           }
