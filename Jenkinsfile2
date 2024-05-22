@@ -33,7 +33,7 @@ pipeline {
 
     stage('Emulator & Appium (Parallel)') {
       parallel {
-        stage('Create Emulator') {
+        stage('Start Emulator') {
           steps {
             script {
               try {
