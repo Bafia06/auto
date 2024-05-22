@@ -15,7 +15,7 @@ public class appiumTest {
     WebDriver driver;
     @BeforeTest
     public void init() throws MalformedURLException {
-        File app= new File("C:\\Users\\rouqa\\Desktop\\bitbar-sample-app.apk");
+        File app= new File("bitbar-sample-app.apk");
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("platformName", "Android");
         capabilities.setCapability("automationName", "UiAutomator2");
