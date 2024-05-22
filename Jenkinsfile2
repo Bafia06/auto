@@ -31,12 +31,6 @@ pipeline {
     stage('Create AVD') {
       steps {
           script {
-          def widthHeight = [
-                'S24_Ultra': '1440x3120',
-                'S24': '1080x2340',
-                'S23_Ultra': '1440x3088',
-                'S23': '1080x2340'
-            ].get(AVD)
           try {
             sh "avdmanager -s create avd -k 'system-images;android-34;google_apis;x86_64' -n ${AVD}"
             sh 'sleep 40'
@@ -52,6 +46,12 @@ pipeline {
         stage('Start Emulator') {
           steps {
             script {
+              def widthHeight = [
+                'S24_Ultra': '1440x3120',
+                'S24': '1080x2340',
+                'S23_Ultra': '1440x3088',
+                'S23': '1080x2340'
+            ].get(AVD)
               try {
                 sh 'emulator -avd ${AVD} -no-window -gpu off -skin ${widthHeight}'
               } catch (err) {}
