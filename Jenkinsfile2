@@ -20,7 +20,7 @@ pipeline {
     }
 
   stages {
-    stage('Install Maven') {
+    /*stage('Install Maven') {
       steps {
         script {
           sh 'apt-get update && apt-get install -y maven'
@@ -37,7 +37,7 @@ pipeline {
            } catch (err) {}
           }
       }
-    }
+    }*/
 
     
 
