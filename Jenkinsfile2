@@ -13,7 +13,7 @@ pipeline {
 
  
   parameters {
-       choice(name: 'AVD', choices: ['S24_Ultra', 'S24', 'S23_Ultra', 'S23'], description: 'Name of your device')
+       choice(name: 'AVD', choices: ['S24_Ultra', 'S24', 'S23_Ultra', 'S23' , 'Default'], description: 'Name of your device')
        // string(name: 'AVD', defaultValue: 'Galaxy_S22', description: 'Name of your device')
        // string(name: 'WIDTH', defaultValue: '', description: 'Device resolution Width')
        // string(name: 'HEIGHT', defaultValue: '', description: 'Device resolution Height')
@@ -50,7 +50,8 @@ pipeline {
                 'S24_Ultra': '1440x3120',
                 'S24': '1080x2340',
                 'S23_Ultra': '1440x3088',
-                'S23': '1080x2340'
+                'S23': '1080x2340',
+                'Default': '480x800'
             ].get(AVD)
               try {
                 sh "emulator -avd ${AVD} -no-window -gpu off -skin ${widthHeight}"
