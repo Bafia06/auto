@@ -51,6 +51,17 @@ pipeline {
           }
         }
 
+
+        stage('Start Appium') {
+          steps {
+            script {
+              try {
+                sh 'appium'
+              } catch (err) {}
+            }
+          }
+        }
+  
         stage('Run Tests') {
           steps {
             script {
