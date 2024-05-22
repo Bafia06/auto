@@ -54,7 +54,7 @@ pipeline {
           post {
             always {
               script {
-                sh -c 'ps aux | grep emulator | grep -v grep | awk "{print \$2}" | xargs kill -9'
+                sh 'ps aux | grep emulator | grep -v grep | awk "{print \$2}" | xargs kill -9'
               }
             }
           }
