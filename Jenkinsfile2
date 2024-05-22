@@ -74,6 +74,7 @@ pipeline {
             always {
               script {
                 sh "ps aux | grep emulator | grep -v grep | awk '{print \$2}' | xargs kill -9"
+                sh "pkill -f node"
               }
             }
           }
