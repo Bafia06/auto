@@ -29,7 +29,7 @@ pipeline {
         script {
           try {
             sh "avdmanager -s create avd -k 'system-images;android-34;google_apis;x86_64' -n ${Model}"
-            sh "sleep 20"
+            
             
           } catch (err) {}
         }
@@ -73,6 +73,7 @@ pipeline {
                     # Change hw.lcd.width value
                     sed -i 's/^hw.lcd.width=.*/hw.lcd.width=${width}/' /root/.android/avd/${Model}.avd/config.ini
                     cat /root/.android/avd/S24_Ultra.avd/config.ini
+                    sh "sleep 20"
                     """
 
         }
