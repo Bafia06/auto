@@ -105,7 +105,7 @@ pipeline {
         stage('Run Tests') {
           steps {
             script {
-              sh 'sleep 60'
+              sh 'sleep 150'
               sh 'mvn clean test'
             }
           }
