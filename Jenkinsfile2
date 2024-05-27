@@ -1,6 +1,6 @@
 pipeline {
   agent {
-    docker { 
+    docker {
       image 'android14'
       args '-u root --device /dev/kvm'
     }
@@ -9,54 +9,92 @@ pipeline {
   tools {
     nodejs 'NodeJS'
     maven 'mvn'
-  } 
+  }
 
- 
   parameters {
-       choice(name: 'AVD', choices: ['S24_Ultra', 'S24', 'S23_Ultra', 'S23' , 'Default'], description: 'Name of your device')
-    }
+    choice(name: 'Model', choices: ['S24_Ultra', 'S24', 'S23_Ultra', 'S23', 'Default'], description: 'Model of your device')
+  }
 
   stages {
-    stage('Install Maven') {
+    /*stage('Install Maven') {
       steps {
         script {
           sh 'apt-get update && apt-get install -y maven'
         }
       }
-    }
-    
+    }*/
+
     stage('Create AVD') {
       steps {
-          script {
+        script {
           try {
-            sh "avdmanager -s create avd -k 'system-images;android-34;google_apis;x86_64' -n ${AVD}"
+            sh "avdmanager -s create avd -k 'system-images;android-34;google_apis;x86_64' -n ${Model}"
             sh 'sleep 20'
-           } catch (err) {}
-          }
+          } catch (err) {}
+        }
       }
     }
 
-    
+    stage('Modify the avd ini file') {
+      steps {
+        script {
+          def width = [
+            'S24_Ultra': 1440,
+            'S24': 1080,
+            'S23_Ultra': 1440,
+            'S23': 1080,
+            'Default': 480
+          ].get(Model)
 
-    stage('Emulator & Appium (Parallel)') {
+          def height = [
+            'S24_Ultra': 3120,
+            'S24': 2340,
+            'S23_Ultra': 3088,
+            'S23': 2340,
+            'Default': 800
+          ].get(Model)
+
+          def density = [
+            'S24_Ultra': 505,
+            'S24': 416,
+            'S23_Ultra': 500,
+            'S23': 425,
+            'Default': 210
+          ].get(Model)
+
+          sh ''
+          '
+          # Change hw.lcd.density value
+          sed - i 's/^hw.lcd.density=.*/hw.lcd.density=${density}/' / root / .android / avd / $ {
+            Model
+          }.avd / config.ini
+
+          # Change hw.lcd.height value
+          sed - i 's/^hw.lcd.height=.*/hw.lcd.height=${height}/' / root / .android / avd / $ {
+            Model
+          }.avd / config.ini
+
+          # Change hw.lcd.width value
+          sed - i 's/^hw.lcd.width=.*/hw.lcd.width=${width}/' / root / .android / avd / $ {
+            Model
+          }.avd / config.ini ''
+          '
+
+        }
+      }
+    }
+
+    /*stage('Emulator & Appium (Parallel)') {
       parallel {
         stage('Start Emulator') {
           steps {
             script {
-              def widthHeight = [
-                'S24_Ultra': '1440x3120',
-                'S24': '1080x2340',
-                'S23_Ultra': '1440x3088',
-                'S23': '1080x2340',
-                'Default': '480x800'
-            ].get(AVD)
               try {
-                sh "emulator -avd ${AVD} -no-window -gpu off -skin ${widthHeight}"
+                sh "emulator -avd ${Model} -no-window -gpu off"
               } catch (err) {}
             }
           }
         }
-
 
         stage('Start Appium') {
           steps {
@@ -67,7 +105,7 @@ pipeline {
             }
           }
         }
-  
+
         stage('Run Tests') {
           steps {
             script {
@@ -86,7 +124,7 @@ pipeline {
           }
         }
       }
-    }
+    }*/
   }
 
 }
