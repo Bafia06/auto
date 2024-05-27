@@ -14,9 +14,6 @@ pipeline {
  
   parameters {
        choice(name: 'AVD', choices: ['S24_Ultra', 'S24', 'S23_Ultra', 'S23' , 'Default'], description: 'Name of your device')
-       // string(name: 'AVD', defaultValue: 'Galaxy_S22', description: 'Name of your device')
-       // string(name: 'WIDTH', defaultValue: '', description: 'Device resolution Width')
-       // string(name: 'HEIGHT', defaultValue: '', description: 'Device resolution Height')
     }
 
   stages {
