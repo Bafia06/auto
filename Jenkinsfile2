@@ -16,13 +16,13 @@ pipeline {
   }
 
   stages {
-    /*stage('Install Maven') {
+    stage('Install Maven') {
       steps {
         script {
           sh 'apt-get update && apt-get install -y maven'
         }
       }
-    }*/
+    }
 
     stage('Create AVD') {
       steps {
@@ -77,7 +77,7 @@ pipeline {
       }
     }
 
-    /*stage('Emulator & Appium (Parallel)') {
+    stage('Emulator & Appium (Parallel)') {
       parallel {
         stage('Start Emulator') {
           steps {
@@ -117,7 +117,7 @@ pipeline {
           }
         }
       }
-    }*/
+    }
   }
 
 }
