@@ -84,7 +84,7 @@ pipeline {
           steps {
             script {
               try {
-                sh "emulator -avd ${Model} -gpu off"
+                sh "emulator -avd ${Model} -no-boot-anim -no-window"
               } catch (err) {}
             }
           }
