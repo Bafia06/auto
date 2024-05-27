@@ -62,8 +62,7 @@ pipeline {
             'Default': 210
           ].get(Model)
 
-          sh ''
-          '
+          sh '''
           # Change hw.lcd.density value
           sed - i 's/^hw.lcd.density=.*/hw.lcd.density=${density}/' / root / .android / avd / $ {
             Model
@@ -77,8 +76,7 @@ pipeline {
           # Change hw.lcd.width value
           sed - i 's/^hw.lcd.width=.*/hw.lcd.width=${width}/' / root / .android / avd / $ {
             Model
-          }.avd / config.ini ''
-          '
+          }.avd / config.ini '''
 
         }
       }
