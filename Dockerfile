@@ -4,8 +4,7 @@ ENV DEBIAN_FRONTEND noninteractive
 WORKDIR /
 
 RUN apt update && apt install -y curl sudo wget unzip bzip2 git \
-  libdrm-dev libxkbcommon-dev libgbm-dev libasound-dev libnss3 \
-  libxcursor1 libpulse-dev libxshmfence-dev xauth xvfb
+  libdrm-dev libxkbcommon-dev libgbm-dev libasound-dev maven
 
 RUN apt-get install -qy openjdk-21-jdk
 
