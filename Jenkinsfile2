@@ -29,7 +29,7 @@ pipeline {
         script {
           try {
             sh "avdmanager -s create avd -k 'system-images;android-34;google_apis;x86_64' -n ${Model}"
-            sh 'sleep 20'
+            
           } catch (err) {}
         }
       }
