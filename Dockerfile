@@ -9,7 +9,7 @@ RUN apt update && apt install -y curl sudo wget unzip bzip2 git \
 RUN apt-get install -qy openjdk-21-jdk
 
 ARG ARCH="x86_64"
-ARG TARGET="google_apis_playstore"
+ARG TARGET="google_apis"
 ARG API_LEVEL="34"
 ARG BUILD_TOOLS="34.0.0"
 
@@ -41,7 +41,3 @@ RUN curl -sL https://deb.nodesource.com/setup_20.x | bash && \
     apt-get autoremove --purge -y && \
     apt-get clean && \
     rm -Rf /tmp/* && rm -Rf /var/lib/apt/lists/*
-
-
-
-CMD ["appium"]
