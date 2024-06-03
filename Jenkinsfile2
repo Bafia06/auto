@@ -15,7 +15,7 @@ pipeline {
     stage('Start Appium') {
           steps {
             script {
-              sh 'apt-get install maven'
+              sh 'apt-get -y install maven'
             }
           }
         }
