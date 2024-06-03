@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'android14'
+      image 'dockertest'
       args '-u root --device /dev/kvm'
     }
   }
