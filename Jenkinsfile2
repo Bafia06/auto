@@ -11,15 +11,6 @@ pipeline {
   }
 
   stages {
-
-    stage('Start Appium') {
-          steps {
-            script {
-              sh 'apt-get -y install maven'
-            }
-          }
-        }
-
     stage('Create AVD') {
       steps {
         script {
