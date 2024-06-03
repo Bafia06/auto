@@ -6,11 +6,6 @@ pipeline {
     }
   }
 
-  tools {
-    nodejs 'NodeJS'
-    maven 'mvn'
-  }
-
   parameters {
     choice(name: 'Model', choices: ['S24_Ultra', 'S24', 'S23_Ultra', 'S23', 'Default'], description: 'Model of your device')
   }
