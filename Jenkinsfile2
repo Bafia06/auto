@@ -91,15 +91,7 @@ pipeline {
         stage('Run Tests') {
           steps {
             script {
-              sh '''
-                echo "Waiting for emulator to start..."
-                boot_completed=""
-                until [ "$boot_completed" = "1" ]; do
-                  sleep 10
-                  boot_completed=$(adb -e shell getprop sys.boot_completed 2>/dev/null | tr -d '\r')
-                done
-                echo "Emulator is ready"
-              '''
+              sh 'sleep 200'
               sh 'mvn clean test'
             }
           }
